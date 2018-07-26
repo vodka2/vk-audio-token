@@ -14,7 +14,7 @@ class AndroidCheckin {
 
     public function doCheckin(){
         curl_reset($this->params->curl);
-        $this->params->setCommon();
+        $this->params->setCommonGCM();
         curl_setopt(
             $this->params->curl,
             CURLOPT_URL,

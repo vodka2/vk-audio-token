@@ -25,7 +25,7 @@ class TokenReceiver {
 
     private function getNonRefreshed(){
         curl_reset($this->params->curl);
-        $this->params->setCommon();
+        $this->params->setCommonVK();
         curl_setopt(
             $this->params->curl,
             CURLOPT_URL,
@@ -40,7 +40,7 @@ class TokenReceiver {
 
     private function getReceipt(){
         curl_reset($this->params->curl);
-        $this->params->setCommon();
+        $this->params->setCommonGCM();
         curl_setopt(
             $this->params->curl,
             CURLOPT_URL,
@@ -82,14 +82,14 @@ class TokenReceiver {
         $str = curl_exec($this->params->curl);
         $res = explode('|ID|2|:', $str)[1];
         if($res == 'PHONE_REGISTRATION_ERROR'){
-            throw new TokenException(TokenException::REGISTRATION_ERROR);
+            throw new TokenException(TokenException::REGISTRATION_ERROR, $str);
         }
         return $res;
     }
 
     private function refreshToken($token, $receipt){
         curl_reset($this->params->curl);
-        $this->params->setCommon();
+        $this->params->setCommonVK();
         curl_setopt(
             $this->params->curl,
             CURLOPT_URL,
