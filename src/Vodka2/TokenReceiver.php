@@ -34,6 +34,9 @@ class TokenReceiver {
             "&v=5.71&scope=" . $this->scope
         );
         $dec = json_decode(curl_exec($this->params->curl));
+        if(!isset($dec->user_id)){
+            throw new TokenException(TokenException::TOKEN_NOT_RECEIVED, $dec);
+        }
         $this->id = $dec->user_id;
         return $dec->access_token;
     }
