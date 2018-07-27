@@ -59,5 +59,9 @@ $authData = $checkin->doCheckin();
 //С помощью этих данных можно получить несколько токенов
 var_dump($authData);
 
-$receiver = new TokenReceiver($argv[1], $argv[2], $authData, $params);
+
+$login = $argv[1];
+$pass = $argv[2];
+
+$receiver = new TokenReceiver($login, $pass, $authData, $params);
 echo $receiver->getToken();
