@@ -6,6 +6,18 @@ This code makes it possible to obtain VK token, that works for VK audio API, so 
 
 See `example.php` to see how it can be used. This script obtains both GMS credentials and VK token. Just run it: `example.php login pass` and it will print the token.
 
+There is also more advanced CLI tool:
+```
+Usage: src/cli/vk-audio-token.php [options] vk_login vk_pass
+Options:
+-s file             - save GMS ID and token to the file
+-l file             - load GMS ID and token from file
+-g gms_id:gms_token - use specified GMS ID and token
+-d file             - use droidgruard string from file
+                      instead of hardcoded one
+-h                  - print this help
+```
+
 There are two ways to obtain GMS credentials.
 
 The first way is to get them from a rooted Android device. The token is in `/data/data/com.google.android.gsf/shared_prefs/CheckinService.xml` file and ID is in `/data/data/com.google.android.gms/shared_prefs/Checkin.xml` file. You can install [GMS Credentials](https://github.com/vodka2/gms-credentials) application to see them.
