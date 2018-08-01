@@ -15,7 +15,8 @@ class TokenException extends \Exception
         } else if($code == self::TOKEN_NOT_REFRESHED){
             parent::__construct('Token was not refreshed, tokens are the same', $code);
         } else if($code == self::TOKEN_NOT_RECEIVED){
-            parent::__construct('Can\'t obtain token', $code);
+            $description = $extra->error_description ?: "Unknown error";
+            parent::__construct("Can't obtain token. Error description: $description", $code);
         }
         $this->extra = $extra;
     }

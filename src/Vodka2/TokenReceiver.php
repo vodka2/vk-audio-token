@@ -30,7 +30,7 @@ class TokenReceiver {
             $this->params->curl,
             CURLOPT_URL,
             "https://oauth.vk.com/token?grant_type=password&client_id=2685278".
-            "&client_secret=lxhD8OD7dMsqtXIm5IUY&username=" . $this->login . "&password=" . $this->pass .
+            "&client_secret=lxhD8OD7dMsqtXIm5IUY&username=" . urlencode($this->login) . "&password=" . urlencode($this->pass) .
             "&v=5.71&scope=" . $this->scope
         );
         $dec = json_decode(curl_exec($this->params->curl));
