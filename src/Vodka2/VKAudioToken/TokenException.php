@@ -1,5 +1,5 @@
 <?php
-namespace Vodka2;
+namespace Vodka2\VKAudioToken;
 
 class TokenException extends \Exception
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Vodka2;
+namespace Vodka2\VKAudioToken;
 
 class AndroidCheckin {
     private $params;

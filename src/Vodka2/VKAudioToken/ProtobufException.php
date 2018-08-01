@@ -1,6 +1,6 @@
 <?php
 
-namespace Vodka2;
+namespace Vodka2\VKAudioToken;
 
 class ProtobufException extends \Exception {
     const SYMBOL = 0;
