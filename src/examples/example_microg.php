@@ -17,6 +17,7 @@ $authData = $checkin->doCheckin();
 $mtalkClient = new MTalkClient($authData, $protobufHelper);
 $mtalkClient->sendRequest();
 
+//This array element is needed only for MTalk request
 unset($authData['idStr']);
 
 //You can get multiple tokens using this data
