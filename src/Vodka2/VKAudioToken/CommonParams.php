@@ -9,7 +9,7 @@ class CommonParams {
     public function __construct($vk_ua = false, $gcm_ua = false, $curl = false) {
         if($vk_ua === false){
             $this->vk_ua =
-                "KateMobileAndroid/40.4 lite-394 (Android 4.4.2; SDK 19; x86; unknown Android SDK built for x86; en)"
+                "KateMobileAndroid/51.2 lite-443 (Android 4.4.2; SDK 19; x86; unknown Android SDK built for x86; en)"
             ;
         } else {
             $this->vk_ua = $vk_ua;

@@ -31,7 +31,7 @@ class TokenReceiver {
             CURLOPT_URL,
             "https://oauth.vk.com/token?grant_type=password&client_id=2685278".
             "&client_secret=lxhD8OD7dMsqtXIm5IUY&username=" . urlencode($this->login) . "&password=" . urlencode($this->pass) .
-            "&v=5.71&scope=" . $this->scope
+            "&v=5.72&scope=" . $this->scope
         );
         $dec = json_decode(curl_exec($this->params->curl));
         if(!isset($dec->user_id)){
@@ -57,12 +57,12 @@ class TokenReceiver {
             "X-scope" => "GCM",
             "X-osv" => "23",
             "X-subtype" => "54740537194",
-            "X-app_ver" => "434",
+            "X-app_ver" => "443",
             "X-kid" => "|ID|1|",
             "X-appid" => $this->generateRandomString(11),
-            "X-gmsv" => "9452480",
-            "X-cliv" => "iid-9452000",
-            "X-app_ver_name" => "49 lite",
+            "X-gmsv" => "13283005",
+            "X-cliv" => "iid-10084000",
+            "X-app_ver_name" => "51.2 lite",
             "X-X-kid" => "|ID|1|",
             "X-subscription" => "54740537194",
             "X-X-subscription" => "54740537194",
@@ -71,9 +71,11 @@ class TokenReceiver {
             "sender" => "54740537194",
             "device" => $this->authData['id'],
             "cert" => "966882ba564c2619d55d0a9afd4327a38c327456",
-            "app_ver" => "434",
-            "info" => "IwSu2g51cjoRUO6eTSP7b7VIl0qkOxY",
-            "gcm_ver" => "9452480"
+            "app_ver" => "443",
+            "info" => "g57d5w1C4CcRUO6eTSP7b7VoT8yTYhY",
+            "gcm_ver" => "13283005",
+            "plat" => "0",
+            "X-messenger2" => "1"
         );
         curl_setopt($this->params->curl, CURLOPT_POSTFIELDS,
             http_build_query($paramsArr));
@@ -97,7 +99,7 @@ class TokenReceiver {
             $this->params->curl,
             CURLOPT_URL,
             "https://api.vk.com/method/auth.refreshToken?access_token=" . $token .
-                  "&receipt=" . $receipt . "&v=5.71"
+                  "&receipt=" . $receipt . "&v=5.72"
         );
         $dec = json_decode(curl_exec($this->params->curl));
         $newToken = $dec->response->token;
