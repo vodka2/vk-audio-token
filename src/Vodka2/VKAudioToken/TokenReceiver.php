@@ -9,12 +9,14 @@ class TokenReceiver {
     private $authData;
     private $scope;
     private $id;
+    private $client;
     public function __construct($login, $pass, $authData, CommonParams $params, $scope = "audio,offline") {
         $this->params = $params;
         $this->login = $login;
         $this->pass = $pass;
         $this->authData = $authData;
         $this->scope = urlencode($scope);
+        $this->client = SupportedClients::Kate();
     }
 
     public function getToken(){
@@ -29,8 +31,10 @@ class TokenReceiver {
         curl_setopt(
             $this->params->curl,
             CURLOPT_URL,
-            "https://oauth.vk.com/token?grant_type=password&client_id=2685278".
-            "&client_secret=lxhD8OD7dMsqtXIm5IUY&username=" . urlencode($this->login) . "&password=" . urlencode($this->pass) .
+            "https://oauth.vk.com/token?grant_type=password".
+            "&client_id=".$this->client->getClientId().
+            "&client_secret=".$this->client->getClientSecret().
+            "&username=" . urlencode($this->login) . "&password=" . urlencode($this->pass) .
             "&v=5.72&scope=" . $this->scope
         );
         $dec = json_decode(curl_exec($this->params->curl));

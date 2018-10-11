@@ -9,7 +9,7 @@ class CommonParams {
     public function __construct($vk_ua = false, $gcm_ua = false, $curl = false) {
         if($vk_ua === false){
             $this->vk_ua =
-                "KateMobileAndroid/51.2 lite-443 (Android 4.4.2; SDK 19; x86; unknown Android SDK built for x86; en)"
+                SupportedClients::Kate()->getUserAgent()
             ;
         } else {
             $this->vk_ua = $vk_ua;
@@ -31,7 +31,6 @@ class CommonParams {
     }
 
     public function setCommon(){
-        curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, 0);
         curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, 1);
     }
 
