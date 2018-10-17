@@ -2,11 +2,11 @@
 
 Read this in [russian](README.ru.md).
 
-This code makes it possible to obtain VK token, that works for VK audio API, so you can query audio URIs. The code was obtained through reversing Kate Mobile application. VK login, VK password, GMS ID and GMS token are needed. No additional dependencies are required.
+This code makes it possible to obtain VK token, that works for VK audio API, so you can query audio URIs. The code was obtained through reversing Kate Mobile application and official VK client. VK login, VK password, GMS ID and GMS token are needed. (The last two only for Kate Mobile based method) No additional dependencies are required.
 
-See files in the `examples` directory to see how it can be used. These scripts obtain both GMS credentials and VK token. Just run one of them: `example_microg.php login pass` and it will print the token.
+See files in the `examples` directory to see how it can be used. These scripts obtain both GMS credentials and VK token. Just run one of them: `example_microg.php login pass` and it will print the token. Examples that show how to use obtained VK token are in the `usage` subdirectory.
 
-There is also more advanced CLI tool:
+There is also more advanced CLI tool, that emulates Kate Mobile:
 ```
 Usage: src/cli/vk-audio-token.php [options] vk_login vk_pass
 Options:
@@ -20,6 +20,8 @@ Options:
                       with droidguard string is made
 -h                  - print this help
 ```
+
+## GMS Credentials
 
 There are two ways to obtain GMS credentials.
 
