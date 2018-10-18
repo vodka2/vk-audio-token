@@ -1,6 +1,6 @@
 <?php
 
-include '../autoloader.php';
+include __DIR__.'/../autoloader.php';
 
 use Vodka2\VKAudioToken\AndroidCheckin;
 use Vodka2\VKAudioToken\SmallProtobufHelper;
