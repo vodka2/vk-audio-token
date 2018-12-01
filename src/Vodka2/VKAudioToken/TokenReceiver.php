@@ -35,7 +35,7 @@ class TokenReceiver {
             "&client_id=".$this->client->getClientId().
             "&client_secret=".$this->client->getClientSecret().
             "&username=" . urlencode($this->login) . "&password=" . urlencode($this->pass) .
-            "&v=5.72&scope=" . $this->scope
+            "&v=5.78&scope=" . $this->scope
         );
         $dec = json_decode(curl_exec($this->params->curl));
         if(!isset($dec->user_id)){
@@ -61,12 +61,12 @@ class TokenReceiver {
             "X-scope" => "GCM",
             "X-osv" => "23",
             "X-subtype" => "54740537194",
-            "X-app_ver" => "443",
+            "X-app_ver" => "445",
             "X-kid" => "|ID|1|",
             "X-appid" => $this->generateRandomString(11),
             "X-gmsv" => "13283005",
             "X-cliv" => "iid-10084000",
-            "X-app_ver_name" => "51.2 lite",
+            "X-app_ver_name" => "52.1 lite",
             "X-X-kid" => "|ID|1|",
             "X-subscription" => "54740537194",
             "X-X-subscription" => "54740537194",
@@ -75,8 +75,8 @@ class TokenReceiver {
             "sender" => "54740537194",
             "device" => $this->authData['id'],
             "cert" => "966882ba564c2619d55d0a9afd4327a38c327456",
-            "app_ver" => "443",
-            "info" => "g57d5w1C4CcRUO6eTSP7b7VoT8yTYhY",
+            "app_ver" => "445",
+            "info" => "w8LuNo60zr8UUO6eTSP7b7U4vzObdhY",
             "gcm_ver" => "13283005",
             "plat" => "0",
             "X-messenger2" => "1"
@@ -103,7 +103,7 @@ class TokenReceiver {
             $this->params->curl,
             CURLOPT_URL,
             "https://api.vk.com/method/auth.refreshToken?access_token=" . $token .
-                  "&receipt=" . $receipt . "&v=5.72"
+                  "&receipt=" . $receipt . "&v=5.78"
         );
         $dec = json_decode(curl_exec($this->params->curl));
         $newToken = $dec->response->token;

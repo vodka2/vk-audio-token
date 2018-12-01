@@ -33,7 +33,7 @@ class TokenReceiverOfficial {
             "&client_id=".$this->client->getClientId().
             "&client_secret=".$this->client->getClientSecret().
             "&username=".urlencode($this->login)."&password=".urlencode($this->pass) .
-            "&v=5.90&scope=".$this->scope."&lang=en&2fa_supported=1&lang=en&device_id=".$deviceId
+            "&v=5.93&scope=".$this->scope."&lang=en&2fa_supported=1&lang=en&device_id=".$deviceId
         );
         $dec = json_decode(curl_exec($this->params->curl));
         if(!isset($dec->user_id)){
@@ -47,7 +47,7 @@ class TokenReceiverOfficial {
         $this->performRequest(
             'execute.getUserInfo',
             [
-                "v" => "5.90",
+                "v" => "5.93",
                 "https" => "1",
                 "androidVersion" => "19",
                 "androidModel" => "Android SDK built for x86",
@@ -64,7 +64,7 @@ class TokenReceiverOfficial {
         return $this->performRequest(
             'auth.refreshToken',
             [
-                "v" => "5.90",
+                "v" => "5.93",
                 "https" => "1",
                 "timestamp" => "0",
                 "receipt2" => "",
