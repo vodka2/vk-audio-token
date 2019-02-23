@@ -22,7 +22,7 @@ Options:
 ## Docker
 ```
 docker build -t vk-audio-tokens src/
-docker run -t vk-audio-tokens:latest php src/cli/vk-audio-token.php vk_login vk_pass
+docker run -t vk-audio-tokens:latest php src/cli/vk-audio-token.php -m vk_login vk_pass
 docker run -t vk-audio-tokens:latest php src/examples/usage/example_kate.php token
 ```
 
