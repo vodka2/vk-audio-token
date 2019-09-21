@@ -9,10 +9,12 @@ class TokenReceiverOfficial {
     private $scope;
     private $id;
     private $client;
-    public function __construct($login, $pass, CommonParams $params, $scope = "nohttps,all") {
+    private $authCode;
+    public function __construct($login, $pass, CommonParams $params, $authCode = "", $scope = "nohttps,all") {
         $this->params = $params;
         $this->login = $login;
         $this->pass = $pass;
+        $this->authCode = $authCode;
         $this->scope = urlencode($scope);
         $this->client = SupportedClients::VkOfficial();
     }
@@ -33,9 +35,14 @@ class TokenReceiverOfficial {
             "&client_id=".$this->client->getClientId().
             "&client_secret=".$this->client->getClientSecret().
             "&username=".urlencode($this->login)."&password=".urlencode($this->pass) .
-            "&v=5.93&scope=".$this->scope."&lang=en&2fa_supported=1&lang=en&device_id=".$deviceId
+            "&v=5.93&scope=".$this->scope."&lang=en&".
+            $this->params->getTwoFactorPart($this->authCode).
+            "&lang=en&device_id=".$deviceId
         );
         $dec = json_decode(curl_exec($this->params->curl));
+        if(isset($dec->error) && $dec->error == 'need_validation') {
+            throw new TokenException(TokenException::TWOFA_REQ, $dec);
+        }
         if(!isset($dec->user_id)){
             throw new TokenException(TokenException::TOKEN_NOT_RECEIVED, $dec);
         }

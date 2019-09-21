@@ -8,6 +8,7 @@ use Vodka2\VKAudioToken\SmallProtobufHelper;
 use Vodka2\VKAudioToken\CommonParams;
 use Vodka2\VKAudioToken\TokenReceiver;
 use Vodka2\VKAudioToken\MTalkClient;
+use Vodka2\VKAudioToken\TokenException;
 
 function print_help($file){
     echo
@@ -22,6 +23,9 @@ function print_help($file){
         "-m                  - make microG checkin\n".
         "                      by default checkin\n".
         "                      with droidguard string is made\n".
+        "-t code             - use two factor authentication\n".
+        "                      pass GET_CODE to get code or\n".
+        "                      pass code received in SMS\n".
         "-h                  - print this help\n\n"
     ;
 }
@@ -92,6 +96,11 @@ for($i = 0; $i < count($argv); $i++){
         case '-m':
             $useMicroGCheckin = true;
             break;
+        case '-t':
+            check_arg_exp($argv, $i);
+            $i++;
+            $twoFactorCode = $argv[$i];
+            break;
         default:
             exit_err("Unknown argument $argv[$i]");
     }
@@ -137,6 +146,14 @@ if(isset($gmsSaveFilePath)){
     file_put_contents($gmsSaveFilePath, serialize($authData));
 }
 
-$receiver = new TokenReceiver($login, $pass, $authData, $params);
+$receiver = new TokenReceiver($login, $pass, $authData, $params, isset($twoFactorCode) ? $twoFactorCode : "");
 echo "Receiving token...\n";
-echo "Token: {$receiver->getToken()}\n";
+try {
+    echo "Token: {$receiver->getToken()}\n";
+} catch (TokenException $e) {
+    if ($e->code === TokenException::TWOFA_REQ) {
+        echo "Two factor authentication request. Please add -t code from SMS next time.\n";
+    } else {
+        throw $e;
+    }
+}

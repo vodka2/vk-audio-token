@@ -4,25 +4,32 @@ namespace Vodka2\VKAudioToken;
 
 class TokenReceiver {
     private $params;
+    private $authCode;
     private $login;
     private $pass;
     private $authData;
     private $scope;
     private $id;
     private $client;
-    public function __construct($login, $pass, $authData, CommonParams $params, $scope = "audio,offline") {
+    public function __construct($login, $pass, $authData, CommonParams $params, $authCode = "", $scope = "audio,offline") {
         $this->params = $params;
         $this->login = $login;
         $this->pass = $pass;
+        $this->authCode = $authCode;
         $this->authData = $authData;
         $this->scope = urlencode($scope);
         $this->client = SupportedClients::Kate();
     }
 
     public function getToken(){
-        $receipt = $this->getReceipt();
+        if (!$this->authCode !== 'GET_CODE') {
+            $receipt = $this->getReceipt();
+        }
         $token = $this->getNonRefreshed();
-        return $this->refreshToken($token, $receipt);
+
+        if (!$this->authCode !== 'GET_CODE') {
+            return $this->refreshToken($token, $receipt);
+        }
     }
 
     private function getNonRefreshed(){
@@ -35,9 +42,12 @@ class TokenReceiver {
             "&client_id=".$this->client->getClientId().
             "&client_secret=".$this->client->getClientSecret().
             "&username=" . urlencode($this->login) . "&password=" . urlencode($this->pass) .
-            "&v=5.78&scope=" . $this->scope
+            "&v=5.78&scope=" . $this->scope . $this->params->getTwoFactorPart($this->authCode)
         );
         $dec = json_decode(curl_exec($this->params->curl));
+        if(isset($dec->error) && $dec->error == 'need_validation') {
+            throw new TokenException(TokenException::TWOFA_REQ, $dec);
+        }
         if(!isset($dec->user_id)){
             throw new TokenException(TokenException::TOKEN_NOT_RECEIVED, $dec);
         }

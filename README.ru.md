@@ -16,8 +16,13 @@ Options:
 -m                  - make microG checkin
                       by default checkin
                       with droidguard string is made
+-t code             - use two factor authentication
+                      pass GET_CODE to get code or
+                      pass code received in SMS
 -h                  - print this help
 ```
+
+Двухфакторная авторизация поддерживается, кроме того можно создать пароль для приложения в настройках ВК и использовать его вместо пароля аккаунта.
 
 ## Docker
 ```

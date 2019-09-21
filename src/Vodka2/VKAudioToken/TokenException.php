@@ -7,10 +7,13 @@ class TokenException extends \Exception
     const TOKEN_NOT_REFRESHED = 1;
     const TOKEN_NOT_RECEIVED = 2;
     const REQUEST_ERR = 3;
+    const TWOFA_REQ = 4;
 
     public $extra;
+    public $code;
 
     public function __construct($code, $extra = false){
+        $this->code = $code;
         if($code == self::REGISTRATION_ERROR){
             parent::__construct('Registration error', $code);
         } else if($code == self::TOKEN_NOT_REFRESHED){
@@ -21,6 +24,9 @@ class TokenException extends \Exception
         } else if($code == self::REQUEST_ERR){
             $extraDump = var_export($extra, true);
             parent::__construct("Error when making request. Error extra: $extraDump", $code);
+        } else if ($code === self::TWOFA_REQ) {
+            $extraDump = var_export($extra, true);
+            parent::__construct("Two factor auth is required. Extra: $extraDump", $code);
         }
         $this->extra = $extra;
     }

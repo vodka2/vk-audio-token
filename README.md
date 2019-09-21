@@ -18,8 +18,13 @@ Options:
 -m                  - make microG checkin
                       by default checkin
                       with droidguard string is made
+-t code             - use two factor authentication
+                      pass GET_CODE to get code or
+                      pass code received in SMS
 -h                  - print this help
 ```
+
+Two-factor authentication is supported. You can also add an application password in VK settings and use it instead of your account password.
 
 ## Docker
 ```

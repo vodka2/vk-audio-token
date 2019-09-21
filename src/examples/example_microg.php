@@ -26,6 +26,7 @@ var_dump($authData);
 
 $login = $argv[1];
 $pass = $argv[2];
+$authCode = isset($argv[3]) ? $argv[3] : ""; // for 2 factor authentication with sms, or pass GET_CODE to get code
 
-$receiver = new TokenReceiver($login, $pass, $authData, $params);
+$receiver = new TokenReceiver($login, $pass, $authData, $params, $authCode);
 echo $receiver->getToken();

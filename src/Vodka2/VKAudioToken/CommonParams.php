@@ -30,6 +30,11 @@ class CommonParams {
         }
     }
 
+    public function getTwoFactorPart($code) {
+        return empty($code) ? "" : '&2fa_supported=1&force_sms=1' .
+            (($code === 'GET_CODE') ? '' : '&code=' . urlencode($code));
+    }
+
     public function setCommon(){
         curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, 1);
     }
