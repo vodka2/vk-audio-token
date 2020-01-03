@@ -33,7 +33,37 @@ curl_setopt($ch,
     )
 );
 
-echo json_encode(json_decode(curl_exec($ch)), JSON_PRETTY_PRINT)."\n\n";
+/* Response with m3u8 urls */
+//echo json_encode(json_decode(curl_exec($ch)), JSON_PRETTY_PRINT)."\n\n";
+
+$tempJson = json_decode(curl_exec($ch));
+
+/* Example of getting mp3 from m3u8 url */
+function getMp3FromM3u8($url) {
+    // Not a m3u8 url
+    if (!strpos($url, "index.m3u8?")) {
+        return $url;
+    }
+    if (strpos($url, "/audios/")) {
+        return preg_replace('~^(.+?)/[^/]+?/audios/([^/]+)/.+$~', '\\1/audios/\\2.mp3', $url);
+    } else {
+        return preg_replace('~^(.+?)/(p[0-9]+)/[^/]+?/([^/]+)/.+$~', '\\1/\\2/\\3.mp3', $url);
+    }
+}
+
+$items = $tempJson->response->items;
+foreach ($items as $item) {
+    if ($item->type == 'audios_list') {
+        $allAudios = $item->audios;
+        foreach($allAudios as $audio) {
+            $audio->url = getMp3FromM3u8($audio->url);
+        }
+        break;
+    }
+}
+
+/* Response with mp3 urls */
+echo json_encode($tempJson, JSON_PRETTY_PRINT)."\n\n";
 
 curl_setopt($ch,
     CURLOPT_POSTFIELDS,
