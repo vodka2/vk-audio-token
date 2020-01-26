@@ -35,7 +35,7 @@ class TokenReceiverOfficial {
             "&client_id=".$this->client->getClientId().
             "&client_secret=".$this->client->getClientSecret().
             "&username=".urlencode($this->login)."&password=".urlencode($this->pass) .
-            "&v=5.93&scope=".$this->scope."&lang=en&".
+            "&v=5.116&scope=".$this->scope."&lang=en&".
             $this->params->getTwoFactorPart($this->authCode).
             "&lang=en&device_id=".$deviceId
         );
@@ -54,7 +54,7 @@ class TokenReceiverOfficial {
         $this->performRequest(
             'execute.getUserInfo',
             [
-                "v" => "5.93",
+                "v" => "5.116",
                 "https" => "1",
                 "androidVersion" => "19",
                 "androidModel" => "Android SDK built for x86",
@@ -71,7 +71,7 @@ class TokenReceiverOfficial {
         return $this->performRequest(
             'auth.refreshToken',
             [
-                "v" => "5.93",
+                "v" => "5.116",
                 "https" => "1",
                 "timestamp" => "0",
                 "receipt2" => "",
