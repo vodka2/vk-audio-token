@@ -42,7 +42,7 @@ class TokenReceiver {
             "&client_id=".$this->client->getClientId().
             "&client_secret=".$this->client->getClientSecret().
             "&username=" . urlencode($this->login) . "&password=" . urlencode($this->pass) .
-            "&v=5.78&scope=" . $this->scope . $this->params->getTwoFactorPart($this->authCode)
+            "&v=5.95&scope=" . $this->scope . $this->params->getTwoFactorPart($this->authCode)
         );
         $dec = json_decode(curl_exec($this->params->curl));
         if(isset($dec->error) && $dec->error == 'need_validation') {
@@ -71,12 +71,12 @@ class TokenReceiver {
             "X-scope" => "GCM",
             "X-osv" => "23",
             "X-subtype" => "54740537194",
-            "X-app_ver" => "445",
+            "X-app_ver" => "460",
             "X-kid" => "|ID|1|",
             "X-appid" => $this->generateRandomString(11),
-            "X-gmsv" => "13283005",
-            "X-cliv" => "iid-10084000",
-            "X-app_ver_name" => "52.1 lite",
+            "X-gmsv" => "200313005",
+            "X-cliv" => "iid-12211000",
+            "X-app_ver_name" => "56 lite",
             "X-X-kid" => "|ID|1|",
             "X-subscription" => "54740537194",
             "X-X-subscription" => "54740537194",
@@ -85,11 +85,11 @@ class TokenReceiver {
             "sender" => "54740537194",
             "device" => $this->authData['id'],
             "cert" => "966882ba564c2619d55d0a9afd4327a38c327456",
-            "app_ver" => "445",
-            "info" => "w8LuNo60zr8UUO6eTSP7b7U4vzObdhY",
-            "gcm_ver" => "13283005",
+            "app_ver" => "460",
+            "info" => "U_ojcf1ahbQaUO6eTSP7b7WomakK_hY",
+            "gcm_ver" => "200313005",
             "plat" => "0",
-            "X-messenger2" => "1"
+            "target_ver" => "28"
         );
         curl_setopt($this->params->curl, CURLOPT_POSTFIELDS,
             http_build_query($paramsArr));
@@ -113,7 +113,7 @@ class TokenReceiver {
             $this->params->curl,
             CURLOPT_URL,
             "https://api.vk.com/method/auth.refreshToken?access_token=" . $token .
-                  "&receipt=" . $receipt . "&v=5.78"
+                  "&receipt=" . $receipt . "&v=5.95"
         );
         $dec = json_decode(curl_exec($this->params->curl));
         $newToken = $dec->response->token;
