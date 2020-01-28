@@ -2,7 +2,7 @@
 
 Код позволяет получить токен VK, который подходит для запрашивания URI аудиозаписей, по логину VK, паролю VK, GMS ID и GMS токену (последние два нужны только для метода, основанного на Kate Mobile.) Код получен в результате анализа приложения Kate Mobile и официального клиента ВК. Никаких зависимостей устанавливать не требуется.
 
-Примеры получения токена находится в файлах в директории `examples` Также в них находится код получения данных GMS (Checkin). Запустите какой-нибудь скрипт таким образом: `example_microg.php login pass`, и он выведет токен. Ещё есть примеры использования токена в подкаталоге `usage`.
+Примеры получения токена находится в файлах в директории `examples` Также в них находится код получения данных GMS (Checkin). Запустите какой-нибудь скрипт таким образом: `example_microg.php login pass`, и он выведет токен. Ещё есть примеры использования токена — вызовы различных методов API в подкаталоге `usage`.
 
 Также есть и специальный скрипт со следующими опциями (эмулирующий Kate Mobile):
 ```
@@ -13,8 +13,9 @@ Options:
 -g gms_id:gms_token - use specified GMS ID and token
 -d file             - use droidguard string from file
                       instead of hardcoded one
--m                  - make microG checkin
-                      by default checkin
+-m                  - make microG checkin (default)
+-o                  - old checkin with droidguard string
+                      that may expire
                       with droidguard string is made
 -t code             - use two factor authentication
                       pass GET_CODE to get code or

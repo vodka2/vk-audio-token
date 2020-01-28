@@ -20,8 +20,9 @@ function print_help($file){
         "-g gms_id:gms_token - use specified GMS ID and token\n".
         "-d file             - use droidguard string from file\n".
         "                      instead of hardcoded one\n".
-        "-m                  - make microG checkin\n".
-        "                      by default checkin\n".
+        "-m                  - make microG checkin (default)\n".
+        "-o                  - old checkin with droidguard string\n".
+        "                      that may expire\n".
         "                      with droidguard string is made\n".
         "-t code             - use two factor authentication\n".
         "                      pass GET_CODE to get code or\n".
@@ -48,7 +49,7 @@ function check_arg_exp($argv, $i){
     }
 }
 
-$useMicroGCheckin = false;
+$useMicroGCheckin = true;
 
 // Parsing arguments
 for($i = 0; $i < count($argv); $i++){
@@ -95,6 +96,9 @@ for($i = 0; $i < count($argv); $i++){
             exit(0);
         case '-m':
             $useMicroGCheckin = true;
+            break;
+        case '-o':
+            $useMicroGCheckin = false;
             break;
         case '-t':
             check_arg_exp($argv, $i);
