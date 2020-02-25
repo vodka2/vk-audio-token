@@ -14,5 +14,5 @@ $params = new CommonParams(SupportedClients::VkOfficial()->getUserAgent());
 
 $receiver = new TokenReceiverOfficial($login, $pass, $params, $authCode);
 
-// Token, secret and device id
+// Token and device id
 echo join("\n", $receiver->getToken());
