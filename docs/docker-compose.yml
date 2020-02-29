@@ -1,0 +1,11 @@
+version: '2'
+services:
+  app:
+    build: .
+    volumes:
+      - ${PWD}/package.json:/docs/package.json
+      - ${PWD}/doczrc.js:/docs/doczrc.js
+      - ${PWD}/gatsby-config.js:/docs/gatsby-config.js
+      - ${PWD}/src:/docs/src
+      - ${PWD}/dist/public:/docs/public
+      - ${PWD}/dist/node_modules:/docs/node_modules

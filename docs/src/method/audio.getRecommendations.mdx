@@ -1,0 +1,35 @@
+---
+name: audio.getRecommendations
+menu: "API Methods"
+route: method/audio_getRecommendations
+---
+
+# audio.getRecommendations
+
+Get suggested audios
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|user_id (optional)|User id for which similar audios will be returned|
+|target_audio (optional)|Audio (owner and id) for which similar audios will be returned, if not specified, then recommendations for the specified user will be returned| 
+|count (optional)|Maximum number of audios to return|
+|offset (optional)|Offset to skip that number of audios|
+
+Example (Kate):
+
+```php
+//tmpl-kate-common-start
+$targetAudio = "371745461_456289486";
+
+curl_setopt(
+    $ch,
+    CURLOPT_URL,
+    "https://api.vk.com/method/audio.getRecommendations?access_token=".TOKEN.
+    "&target_audio=$targetAudio&count=10&offset=20&v=5.95"
+);
+//tmpl-kate-common-end
+```
+
+

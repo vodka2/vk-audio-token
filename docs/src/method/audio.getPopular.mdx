@@ -1,0 +1,30 @@
+---
+name: audio.getPopular
+menu: "API Methods"
+route: method/audio_getPopular
+---
+
+# audio.getPopular
+
+Get popular audios
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|count (optional)|Maximum number of audios to return|
+|offset (optional)|Offset to skip that number of audios|
+
+Example (Kate):
+
+```php
+//tmpl-kate-common-start
+curl_setopt(
+    $ch,
+    CURLOPT_URL,
+    "https://api.vk.com/method/audio.getPopular?access_token=".TOKEN."&offset=20&count=10&v=5.95"
+);
+//tmpl-kate-common-end
+```
+
+

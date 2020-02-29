@@ -1,0 +1,28 @@
+---
+name: audio.getLyrics
+menu: "API Methods"
+route: method/audio_getlyrics
+---
+
+# audio.getLyrics
+
+Get lyrics for an audio
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|lyrics_id|Lyrics id (for example, obtained by audio.search)|
+
+Example (Kate):
+```php
+//tmpl-kate-common-start
+$lyricsId = 7281500;
+
+curl_setopt(
+    $ch,
+    CURLOPT_URL,
+    "https://api.vk.com/method/audio.getLyrics?access_token=".TOKEN."&lyrics_id=$lyricsId&v=5.95"
+);
+//tmpl-kate-common-end
+```

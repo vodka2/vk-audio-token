@@ -1,0 +1,32 @@
+---
+name: audio.add
+menu: "API Methods"
+route: method/audio_add
+---
+
+# audio.add
+
+Add an audio to the specified user or community audios
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|owner_id|User or community id (for example, obtained by users.get)|
+|audio_id|Audio id|
+
+Example (Kate):
+
+```php
+//tmpl-kate-common-start
+$ownerId = 371745461;
+$audioId = 456289486;
+
+curl_setopt(
+    $ch,
+    CURLOPT_URL,
+    "https://api.vk.com/method/audio.add?access_token=".TOKEN."&owner_id=$ownerId&audio_id=$audioId&v=5.95"
+);
+//tmpl-kate-common-end
+```
+

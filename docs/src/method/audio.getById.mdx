@@ -1,0 +1,30 @@
+---
+name: audio.getById
+menu: "API Methods"
+route: method/audio_getbyid
+---
+
+# audio.getById
+
+Get audios by id
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|audios|List of one or multiple audio ids, separated with ","|
+
+Example (Kate):
+```php
+//tmpl-kate-common-start
+$audioIds = "371745461_456289486,-41489995_202246189";
+
+curl_setopt(
+    $ch,
+    CURLOPT_URL,
+    "https://api.vk.com/method/audio.getById?access_token=".TOKEN.
+    "&audios=".urlencode($audioIds).
+    "&v=5.95"
+);
+//tmpl-kate-common-end
+```

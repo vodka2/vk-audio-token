@@ -6,6 +6,8 @@ This code makes it possible to obtain VK token, that works for VK audio API, so 
 
 See files in the `examples` directory to see how it can be used. These scripts obtain both GMS credentials and VK token. Just run one of them: `example_microg.php login pass` and it will print the token. Examples that show how to use obtained VK token with different API methods are in the `usage` subdirectory.
 
+More detailed VK API description is available at [https://vodka2.github.io/vk-audio-token/](https://vodka2.github.io/vk-audio-token/) (Currently in progress)
+
 There is also more advanced CLI tool, that emulates Kate Mobile:
 ```
 Usage: src/cli/vk-audio-token.php [options] vk_login vk_pass

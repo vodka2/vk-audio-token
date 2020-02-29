@@ -1,0 +1,36 @@
+---
+name: audio.reorder
+menu: "API Methods"
+route: method/audio_reorder
+---
+
+# audio.reorder
+
+Move one audio before other in my audios for a specified user
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|owner_id|User or community id (for example, obtained by users.get)|
+|audio_id|Audio id to move|
+|before|Id of the "other" audio to move before|
+
+Example (Kate):
+
+```php
+//tmpl-kate-common-start
+$ownerId = 1;
+$audioId = 2;
+$beforeAudioId = 3;
+
+curl_setopt(
+    $ch,
+    CURLOPT_URL,
+    "https://api.vk.com/method/audio.reorder?access_token=".TOKEN.
+    "&owner_id=$ownerId&audio_id=$audioId&before=$beforeAudioId&v=5.95"
+);
+//tmpl-kate-common-end
+```
+
+

@@ -1,0 +1,25 @@
+{
+  "name": "vk-audio-token-docs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "develop": "gatsby develop"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "docz": "^2.3.0-alpha.13",
+    "gatsby": "^2.20.2",
+    "gatsby-cli": "^2.11.0",
+    "gatsby-source-filesystem": "^2.2.1",
+    "gatsby-theme-docz": "^2.3.0-alpha.13",
+    "prism-react-renderer": "^1.0.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "theme-ui": "^0.3.1",
+    "unist-builder": "^2.0.3",
+    "unist-util-visit-parents": "^3.0.2"
+  }
+}

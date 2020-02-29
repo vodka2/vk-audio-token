@@ -1,0 +1,33 @@
+---
+name: audio.search
+menu: "API Methods"
+route: method/audio_search
+---
+
+# audio.search
+
+Search audios by name
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|q|Text to search for|
+|count (optional)|Maximum number of audios to return|
+|offset (optional)|Offset to skip that number of audios|
+|performer_only (optional)|1 — search only for performer, 0 or not specified — search for performer and song name|
+|auto_complete (optional)|1 — fix errors in query (Огыешт => Justin), 0 or not specified — don't fix|
+
+Example (Kate):
+```php
+//tmpl-kate-common-start
+$query = "Justin Bieber - Baby";
+
+curl_setopt(
+    $ch,
+    CURLOPT_URL,
+    "https://api.vk.com/method/audio.search?access_token=".TOKEN.
+    "&q=".urlencode($query)."&count=10&v=5.95"
+);
+//tmpl-kate-common-end
+```
