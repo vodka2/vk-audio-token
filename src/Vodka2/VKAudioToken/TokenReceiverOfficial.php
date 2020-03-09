@@ -46,7 +46,7 @@ class TokenReceiverOfficial {
             throw new TokenException(TokenException::TOKEN_NOT_RECEIVED, $dec);
         }
         $this->id = $dec->user_id;
-        return [$dec->access_token, $deviceId];
+        return [$dec->access_token];
     }
 
     private function generateRandomString($length, $characters) {
