@@ -1,0 +1,15 @@
+{
+  "name": "vodka2/vk-audio-token",
+  "description": "Code that obtains VK tokens that work for VK audio API. Код для получения токена VK, подходящего для Audio API.",
+  "type": "library",
+  "authors": [
+    {
+      "name": "vodka2",
+      "email": "vodka2vodka@rambler.ru"
+    }
+  ],
+  "minimum-stability": "stable",
+  "autoload": {
+    "psr-4": {"Vodka2\\VKAudioToken\\": "src/Vodka2/VKAudioToken"}
+  }
+}

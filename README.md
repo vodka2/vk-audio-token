@@ -27,6 +27,12 @@ Options:
 
 Two-factor authentication is supported. You can also add an application password in VK settings and use it instead of your account password.
 
+## Composer
+
+```
+composer require vodka2/vk-audio-token
+```
+
 ## Docker
 ```
 docker build -t vk-audio-tokens src/

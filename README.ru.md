@@ -25,6 +25,12 @@ Options:
 
 Двухфакторная авторизация поддерживается, кроме того можно создать пароль для приложения в настройках ВК и использовать его вместо пароля аккаунта.
 
+## Composer
+
+```
+composer require vodka2/vk-audio-token
+```
+
 ## Docker
 ```
 docker build -t vk-audio-tokens src/
