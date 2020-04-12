@@ -15,6 +15,9 @@ Parameters:
 |owner_id|User or community id (for example, obtained by users.get)|
 |count (optional)|Maximum number of playlists to return|
 |offset (optional)|Offset to skip that number of playlists|
+|extended (optional)|1 - return information about the owner of the playlist|
+|fields (optional)|Comma-separated fields same as in users.get (last_name_gen, city, bdate...)|
+|filters (optional)|Comma-separated filters for playlists: all (default), owned, followed, albums|
 
 Example (Kate):
 ```php

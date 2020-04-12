@@ -1,0 +1,32 @@
+---
+name: audio.createPlaylist
+menu: "API Methods"
+route: method/audio_createPlaylist
+---
+
+# audio.createPlaylist
+
+Create playlist for the specified user or community
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|owner_id|User or community id (for example, obtained by users.get)|
+|title|Title of the new album|
+
+Example (Kate):
+
+```php
+//tmpl-kate-common-start
+$ownerId = 1;
+$title = "New album";
+
+curl_setopt(
+    $ch,
+    CURLOPT_URL,
+    "https://api.vk.com/method/audio.createPlaylist?access_token=".TOKEN.
+    "&owner_id=$ownerId&title=".urlencode($title)."&v=5.95"
+);
+//tmpl-kate-common-end
+```

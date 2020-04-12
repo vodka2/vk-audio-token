@@ -1,0 +1,34 @@
+---
+name: audio.addToPlaylist
+menu: "API Methods"
+route: method/audio_addToPlaylist
+---
+
+# audio.addToPlaylist
+
+Add audios to the specified playlist
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|owner_id|User or community id (for example, obtained by users.get)|
+|playlist_id|Id of the playlist|
+|audios|List of one or multiple audio ids, separated with ","|
+
+Example (Kate):
+
+```php
+//tmpl-kate-common-start
+$ownerId = 1;
+$playlistId = 1;
+$audioIds = '371745461_456289486,-41489995_202246189';
+
+curl_setopt(
+    $ch,
+    CURLOPT_URL,
+    "https://api.vk.com/method/audio.addToPlaylist?access_token=".TOKEN.
+    "&owner_id=$ownerId&playlist_id=$playlistId&audio_ids=".urlencode($audioIds)."&v=5.95"
+);
+//tmpl-kate-common-end
+```

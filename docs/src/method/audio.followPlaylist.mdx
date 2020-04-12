@@ -1,0 +1,31 @@
+---
+name: audio.followPlaylist
+menu: "API Methods"
+route: method/audio_followPlaylist
+---
+
+# audio.followPlaylist
+
+Add playlist to the current user playlists
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|owner_id|Id of the owner of the playlist|
+|playlist_id|Playlist id|
+
+Example (Kate):
+```php
+//tmpl-kate-common-start
+$ownerId = -34384434;
+$playlistId = 84577259;
+
+curl_setopt(
+    $ch,
+    CURLOPT_URL,
+    "https://api.vk.com/method/audio.followPlaylist?access_token=".TOKEN.
+    "&owner_id=$ownerId&playlist_id=$playlistId&v=5.95"
+);
+//tmpl-kate-common-end
+```

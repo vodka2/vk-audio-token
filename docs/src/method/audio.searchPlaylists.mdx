@@ -1,0 +1,32 @@
+---
+name: audio.searchPlaylists
+menu: "API Methods"
+route: method/audio_searchPlaylists
+---
+
+# audio.searchPlaylists
+
+Search playlists
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|q|Text to search for|
+|count (optional)|Maximum number of playlists to return|
+|offset (optional)|Offset to skip that number of playlists|
+|filters (optional)|Comma-separated filters for playlists: all (default), owned, followed, albums|
+
+Example (Kate):
+```php
+//tmpl-kate-common-start
+$query = "Adele";
+
+curl_setopt(
+    $ch,
+    CURLOPT_URL,
+    "https://api.vk.com/method/audio.searchPlaylists?access_token=".TOKEN.
+    "&q=".urlencode($query)."&count=10&filters=albums&v=5.95"
+);
+//tmpl-kate-common-end
+```
