@@ -14,6 +14,7 @@ function print_help($file){
     echo
         "VK audio token receiver\n\n".
         "Usage: $file [options] vk_login vk_pass\n".
+        "       $file [options] non_refreshed_kate_token\n".
         "Options:\n".
         "-s file             - save GMS ID and token to the file\n".
         "-l file             - load GMS ID and token from file\n".
@@ -33,7 +34,7 @@ function print_help($file){
 
 $scriptName = array_shift($argv);
 
-if(count($argv) < 2){
+if(count($argv) === 0 || (count($argv) === 1 && $argv[0][0] === '-')){
     print_help($scriptName);
     exit(0);
 }
@@ -53,11 +54,6 @@ $useMicroGCheckin = true;
 
 // Parsing arguments
 for($i = 0; $i < count($argv); $i++){
-    if($i == (count($argv) - 2)){
-        $login = $argv[$i];
-        $pass = $argv[$i + 1];
-        break;
-    }
     switch ($argv[$i]){
         case '-s':
             check_arg_exp($argv, $i);
@@ -106,12 +102,20 @@ for($i = 0; $i < count($argv); $i++){
             $twoFactorCode = $argv[$i];
             break;
         default:
-            exit_err("Unknown argument $argv[$i]");
+            if ($i == (count($argv) - 2)) {
+                $login = $argv[$i];
+                $pass = $argv[$i + 1];
+                $i++;
+            } else if ($i == (count($argv) - 1)) {
+                $nonRefreshedToken = $argv[$i];
+            } else {
+                exit_err("Unknown argument $argv[$i]");
+            }
     }
 }
 
-if(!isset($login)){
-    exit_err("You must specify login and password");
+if(!isset($login) && !isset($nonRefreshedToken)){
+    exit_err("You must specify login and password or non-refreshed token");
 }
 
 if(!$useMicroGCheckin) {
@@ -150,13 +154,15 @@ if(isset($gmsSaveFilePath)){
     file_put_contents($gmsSaveFilePath, serialize($authData));
 }
 
-$receiver = new TokenReceiver($login, $pass, $authData, $params, isset($twoFactorCode) ? $twoFactorCode : "");
+$receiver = isset($login) ? new TokenReceiver($login, $pass, $authData, $params, isset($twoFactorCode) ? $twoFactorCode : "") :
+    TokenReceiver::withoutCredentials($authData, $params, isset($twoFactorCode) ? $twoFactorCode : "");
 echo "Receiving token...\n";
 try {
-    echo "Token: {$receiver->getToken()}\n";
+    echo "Token: {$receiver->getToken(isset($nonRefreshedToken) ? $nonRefreshedToken : "")}\n";
 } catch (TokenException $e) {
     if ($e->code === TokenException::TWOFA_REQ) {
-        echo "Two factor authentication request. Please add -t code from SMS next time.\n";
+        echo "Two factor authentication request. Please add -t code from SMS next time." .
+            (isset($e->extra->redirect_uri) ? " Redirect uri: " . $e->extra->redirect_uri : "") . "\n";
     } else {
         throw $e;
     }

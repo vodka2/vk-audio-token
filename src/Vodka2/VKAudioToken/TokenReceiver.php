@@ -11,6 +11,11 @@ class TokenReceiver {
     private $scope;
     private $id;
     private $client;
+
+    public static function withoutCredentials($authData, CommonParams $params, $authCode = "", $scope = "audio,offline") {
+        return new self("", "", $authData, $params, $authCode, $scope);
+    }
+
     public function __construct($login, $pass, $authData, CommonParams $params, $authCode = "", $scope = "audio,offline") {
         $this->params = $params;
         $this->login = $login;
@@ -21,11 +26,11 @@ class TokenReceiver {
         $this->client = SupportedClients::Kate();
     }
 
-    public function getToken(){
+    public function getToken($nonRefreshedToken = ""){
         if (!$this->authCode !== 'GET_CODE') {
             $receipt = $this->getReceipt();
         }
-        $token = $this->getNonRefreshed();
+        $token = ($nonRefreshedToken === "") ? $this->getNonRefreshed() : $nonRefreshedToken;
 
         if (!$this->authCode !== 'GET_CODE') {
             return $this->refreshToken($token, $receipt);

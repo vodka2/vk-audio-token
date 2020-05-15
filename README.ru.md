@@ -9,6 +9,7 @@
 Также есть и специальный скрипт со следующими опциями (эмулирующий Kate Mobile):
 ```
 Usage: src/cli/vk-audio-token.php [options] vk_login vk_pass
+       src/cli/vk-audio-token.php [options] non_refreshed_kate_token
 Options:
 -s file             - save GMS ID and token to the file
 -l file             - load GMS ID and token from file
