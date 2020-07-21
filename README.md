@@ -2,6 +2,8 @@
 
 Read this in [russian](README.ru.md).
 
+Python port of this code: [vodka2/vkaudiotoken-python](https://github.com/vodka2/vkaudiotoken-python)
+
 This code makes it possible to obtain VK token, that works for VK audio API, so you can query audio URIs. The code was obtained through reversing Kate Mobile application and official VK client. VK login, VK password, GMS ID and GMS token are needed. (The last two only for Kate Mobile based method) No additional dependencies are required.
 
 See files in the `examples` directory to see how it can be used. These scripts obtain both GMS credentials and VK token. Just run one of them: `example_microg.php login pass` and it will print the token. Examples that show how to use obtained VK token with different API methods are in the `usage` subdirectory.
