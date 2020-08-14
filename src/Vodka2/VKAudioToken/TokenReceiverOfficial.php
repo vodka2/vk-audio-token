@@ -7,7 +7,6 @@ class TokenReceiverOfficial {
     private $login;
     private $pass;
     private $scope;
-    private $id;
     private $client;
     private $authCode;
     public function __construct($login, $pass, CommonParams $params, $authCode = "", $scope = "all") {
@@ -26,7 +25,6 @@ class TokenReceiverOfficial {
     private function getNonRefreshed(){
         curl_reset($this->params->curl);
         $this->params->setCommonVK();
-        $deviceId = $this->generateRandomString(16, '0123456789abcdef');
         curl_setopt(
             $this->params->curl,
             CURLOPT_URL,
@@ -36,7 +34,7 @@ class TokenReceiverOfficial {
             "&username=".urlencode($this->login)."&password=".urlencode($this->pass) .
             "&v=5.116&scope=".$this->scope."&lang=en&".
             $this->params->getTwoFactorPart($this->authCode).
-            "&lang=en&device_id=".$deviceId
+            "&lang=en&device_id=".$this->params->generateRandomString(16, '0123456789abcdef')
         );
         $dec = json_decode(curl_exec($this->params->curl));
         if(isset($dec->error) && $dec->error == 'need_validation') {
@@ -45,16 +43,6 @@ class TokenReceiverOfficial {
         if(!isset($dec->user_id)){
             throw new TokenException(TokenException::TOKEN_NOT_RECEIVED, $dec);
         }
-        $this->id = $dec->user_id;
         return [$dec->access_token];
-    }
-
-    private function generateRandomString($length, $characters) {
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $randomString;
     }
 }

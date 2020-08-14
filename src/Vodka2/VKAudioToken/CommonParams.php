@@ -48,4 +48,13 @@ class CommonParams {
         $this->setCommon();
         curl_setopt($this->curl, CURLOPT_USERAGENT, $this->gcm_ua);
     }
+
+    public function generateRandomString($length, $characters) {
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
 }

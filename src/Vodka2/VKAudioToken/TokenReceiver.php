@@ -9,7 +9,6 @@ class TokenReceiver {
     private $pass;
     private $authData;
     private $scope;
-    private $id;
     private $client;
 
     public static function withoutCredentials($authData, CommonParams $params, $authCode = "", $scope = "audio,offline") {
@@ -27,14 +26,9 @@ class TokenReceiver {
     }
 
     public function getToken($nonRefreshedToken = ""){
-        if (!$this->authCode !== 'GET_CODE') {
-            $receipt = $this->getReceipt();
-        }
+        $receipt = $this->getReceipt();
         $token = ($nonRefreshedToken === "") ? $this->getNonRefreshed() : $nonRefreshedToken;
-
-        if (!$this->authCode !== 'GET_CODE') {
-            return $this->refreshToken($token, $receipt);
-        }
+        return $this->refreshToken($token, $receipt);
     }
 
     private function getNonRefreshed(){
@@ -56,7 +50,6 @@ class TokenReceiver {
         if(!isset($dec->user_id)){
             throw new TokenException(TokenException::TOKEN_NOT_RECEIVED, $dec);
         }
-        $this->id = $dec->user_id;
         return $dec->access_token;
     }
 
@@ -78,7 +71,7 @@ class TokenReceiver {
             "X-subtype" => "54740537194",
             "X-app_ver" => "460",
             "X-kid" => "|ID|1|",
-            "X-appid" => $this->generateRandomString(11),
+            "X-appid" => $this->params->generateRandomString(11, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-'),
             "X-gmsv" => "200313005",
             "X-cliv" => "iid-12211000",
             "X-app_ver_name" => "56 lite",
@@ -98,13 +91,8 @@ class TokenReceiver {
         );
         curl_setopt($this->params->curl, CURLOPT_POSTFIELDS,
             http_build_query($paramsArr));
-        curl_exec($this->params->curl);
-        $paramsArr["X-scope"] = "id" . $this->id;
-        $paramsArr["X-kid"] = $paramsArr["X-X-kid"] = "|ID|2|";
-        curl_setopt($this->params->curl, CURLOPT_POSTFIELDS,
-            http_build_query($paramsArr));
         $str = curl_exec($this->params->curl);
-        $res = explode('|ID|2|:', $str)[1];
+        $res = explode('|ID|1|:', $str)[1];
         if($res == 'PHONE_REGISTRATION_ERROR'){
             throw new TokenException(TokenException::REGISTRATION_ERROR, $str);
         }
@@ -126,15 +114,5 @@ class TokenReceiver {
             throw new TokenException(TokenException::TOKEN_NOT_REFRESHED);
         }
         return $newToken;
-    }
-
-    private function generateRandomString($length = 10) {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $randomString;
     }
 }
