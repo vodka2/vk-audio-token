@@ -17,4 +17,11 @@ class SupportedClients {
             "2274003"
         );
     }
+    public static function Boom(){
+        return new VkClient(
+            "VK_Music/4.2.1 (Android 5.1.1; SDK 22; x86_64; unknown Android SDK built for x86_64; en; 320x240)",
+            "",
+            "4705861"
+        );
+    }
 }

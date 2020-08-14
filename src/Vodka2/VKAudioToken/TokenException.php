@@ -9,6 +9,7 @@ class TokenException extends \Exception
     const REQUEST_ERR = 3;
     const TWOFA_REQ = 4;
     const TWOFA_ERR = 5;
+    const REFRESH_ERROR = 6;
 
     public $extra;
     public $code;
@@ -29,6 +30,8 @@ class TokenException extends \Exception
             parent::__construct("Two factor auth is required. Extra: $extraDump", $code);
         } else if ($code === self::TWOFA_ERR) {
             parent::__construct("2FA Error. Extra: $extraDump", $code);
+        } else if ($code == self::REFRESH_ERROR) {
+            parent::__construct("Refresh error. Extra: $extraDump", $code);
         }
     }
 }
