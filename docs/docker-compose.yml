@@ -4,6 +4,7 @@ services:
     build: .
     volumes:
       - ${PWD}/package.json:/docs/package.json
+      - ${PWD}/package-lock.json:/docs/package-lock.json
       - ${PWD}/doczrc.js:/docs/doczrc.js
       - ${PWD}/gatsby-config.js:/docs/gatsby-config.js
       - ${PWD}/src:/docs/src
