@@ -1,6 +1,6 @@
 {
   "name": "vodka2/vk-audio-token",
-  "description": "Code that obtains VK tokens that work for VK audio API. Код для получения токена VK, подходящего для Audio API.",
+  "description": "Library that obtains VK tokens that work for VK audio API. Библиотека для получения токена VK, подходящего для Audio API.",
   "type": "library",
   "keywords": ["vk", "vkontakte", "audio", "music"],
   "license": "MIT",

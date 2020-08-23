@@ -1,14 +1,69 @@
-# Code that obtains VK tokens that work for VK audio API
+# Library that obtains VK tokens that work for VK audio API
 
 Read this in [russian](README.ru.md).
 
-Python port of this code: [vodka2/vkaudiotoken-python](https://github.com/vodka2/vkaudiotoken-python)
+Python port of this library: [vodka2/vkaudiotoken-python](https://github.com/vodka2/vkaudiotoken-python)
 
-This code makes it possible to obtain VK token, that works for VK audio API, so you can query audio URIs. The code was obtained through reversing Kate Mobile application and official VK client. VK login, VK password, GMS ID and GMS token are needed. (The last two only for Kate Mobile based method) No additional dependencies are required.
+This library obtains VK token, that works for VK audio API, so you can search artists, songs, albums, query audio URIs, add audios to "My audios" etc. The library supports Kate Mobile, Boom and VK Official clients. (Thanks to YTKABOBR for reversing the Boom client)
 
-See files in the `examples` directory to see how it can be used. These scripts obtain both GMS credentials and VK token. Just run one of them: `example_microg.php login pass` and it will print the token. Examples that show how to use obtained VK token with different API methods are in the `usage` subdirectory.
+Actually there two versions of VK API, one for Kate Mobile and one for the official client. Boom client uses VK API somewhat similar to Kate one, but it has some limitations, not all methods are supported. Moreover it requires `messages` permission (do they scan our messages?) and sometimes returns 500 errors. On the other hand it supports another API in addition to VK API and may be used as a fallback.
 
-More detailed VK API description is available at [https://vodka2.github.io/vk-audio-token/](https://vodka2.github.io/vk-audio-token/) (Currently in progress)
+## Installation
+
+```
+composer require vodka2/vk-audio-token
+```
+
+... or simply copy the cloned repository somewhere and include `src/autoloader.php`. The library requires no dependencies.
+
+
+## Getting tokens
+
+The simplest example:
+
+```php
+<?php
+
+use Vodka2\VKAudioToken\TokenFacade;
+
+$login = "+71234567890";
+$pass = "12345";
+
+// print token and User-Agent
+// setting User-Agent is mandatory when querying the API!
+var_export(TokenFacade::getKateToken($login, $pass));
+```
+
+More advanced examples are in the `examples` directory. Start with `example_simple.php`. 
+
+## Using tokens
+
+The simplest example:
+
+```php
+<?php
+
+define('TOKEN', 'token from previous example');
+define('USER_AGENT', 'User-Agent from previous example');
+$ch = curl_init();
+
+curl_setopt($ch, CURLOPT_HTTPHEADER, array('User-Agent: '.USER_AGENT));
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+curl_setopt(
+    $ch,
+    CURLOPT_URL,
+    "https://api.vk.com/method/audio.getById?access_token=".TOKEN.
+    "&audios=".urlencode("371745461_456289486").
+    "&v=5.95"
+);
+
+echo json_encode(json_decode(curl_exec($ch)), JSON_PRETTY_PRINT)."\n\n";
+```
+
+More examples that show how to use obtained VK tokens with different API methods are in the `usage` subdirectory. More detailed VK API description is available at [https://vodka2.github.io/vk-audio-token/](https://vodka2.github.io/vk-audio-token/) (Currently in progress)
+
+## CLI tool
 
 There is also more advanced CLI tool, that emulates Kate Mobile:
 ```
@@ -30,14 +85,6 @@ Options:
 -h                  - print this help
 ```
 
-Two-factor authentication is supported. You can also add an application password in VK settings and use it instead of your account password.
-
-## Composer
-
-```
-composer require vodka2/vk-audio-token
-```
-
 ## Docker
 ```
 docker build -t vk-audio-tokens src/
@@ -45,9 +92,17 @@ docker run -t vk-audio-tokens:latest php src/cli/vk-audio-token.php -m vk_login 
 docker run -t vk-audio-tokens:latest php src/examples/usage/example_kate.php token
 ```
 
+## 2FA
+
+Two factor authorization with SMS is supported for Kate and VK Official clients, however VK server sometimes does not send an SMS. If you don't receive it, you can use `TwoFAHelper` class to force resending. See `example_twofahelper.php`
+
+For the Boom client the library uses implicit flow authorization and makes requests to the VK website. VK server may make a call, send an SMS or send private message to your VK account. You can also authenticate the client yourself and only pass the token and user id.
+
+It is also possible to create separate passwords in VK account settings and use them instead of your account password.
+
 ## GMS Credentials
 
-There are two ways to obtain GMS credentials.
+GMS credentials are also obtained while obtaining tokens. There are two ways to obtain GMS credentials.
 
 The first way is to get them from a rooted Android device. The token is in `/data/data/com.google.android.gsf/shared_prefs/CheckinService.xml` file and ID is in `/data/data/com.google.android.gms/shared_prefs/Checkin.xml` file. You can install [GMS Credentials](https://github.com/vodka2/gms-credentials) application to see them.
 
@@ -57,9 +112,7 @@ For the first option you need a string that is generated by `com.google.ccc.abus
 
 It is also possible to intercept Android Checkin request (it is made on first boot) and see the returned GMS ID and token.
 
-## Buy me some healthy Russian drinks
-
-Free drinks always give me motivation to write code.
+## Buy me some healthy Russian drinks!
 
 WMR — P778046516389
 
