@@ -1,0 +1,29 @@
+---
+name: audio.getCount
+menu: "API Methods"
+route: method/audio_getCount
+---
+
+# audio.getCount
+
+Get count of user or community audios
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|owner_id|Id of the user or community|
+
+Example (Kate):
+```php
+//tmpl-kate-common-start
+$ownerId = -34384434;
+
+curl_setopt(
+    $ch,
+    CURLOPT_URL,
+    "https://api.vk.com/method/audio.getCount?access_token=".TOKEN.
+    "&owner_id=$ownerId&v=5.95"
+);
+//tmpl-kate-common-end
+```

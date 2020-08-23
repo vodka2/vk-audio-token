@@ -1,0 +1,31 @@
+---
+name: audio.searchAlbums
+menu: "API Methods"
+route: method/audio_searchAlbums
+---
+
+# audio.searchAlbums
+
+Search albums by name
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|q|Text to search for|
+|count (optional)|Maximum number of albums to return|
+|offset (optional)|Offset to skip that number of albums|
+
+Example (Kate):
+```php
+//tmpl-kate-common-start
+$query = "Under the Mistletoe";
+
+curl_setopt(
+    $ch,
+    CURLOPT_URL,
+    "https://api.vk.com/method/audio.searchAlbums?access_token=".TOKEN."&q=".
+        urlencode($query)."&count=1&v=5.95"
+);
+//tmpl-kate-common-end
+```

@@ -1,0 +1,31 @@
+---
+name: audio.searchArtists
+menu: "API Methods"
+route: method/audio_searchArtists
+---
+
+# audio.searchArtists
+
+Search artists by name
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|q|Text to search for|
+|count (optional)|Maximum number of artists to return|
+|offset (optional)|Offset to skip that number of artists|
+
+Example (Kate):
+```php
+//tmpl-kate-common-start
+$query = "Justin Bieber";
+
+curl_setopt(
+    $ch,
+    CURLOPT_URL,
+    "https://api.vk.com/method/audio.searchArtists?access_token=".TOKEN."&q=".
+    urlencode($query)."&count=3&v=5.95"
+);
+//tmpl-kate-common-end
+```

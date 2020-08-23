@@ -1,0 +1,30 @@
+---
+name: audio.getArtistById
+menu: "API Methods"
+route: method/audio_getArtistById
+---
+
+# audio.getArtistById
+
+Get information about artist by id.
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|artist_id|Id of the artist (for example, returned by audio.searchArtists)|
+|extended (optional)|Return more information (id of the VK page for that artist)| 
+
+Example (Kate):
+```php
+//tmpl-kate-common-start
+$artistId = '1204512717686522332';
+
+curl_setopt(
+    $ch,
+    CURLOPT_URL,
+    "https://api.vk.com/method/audio.getArtistById?access_token=".TOKEN."&artist_id=".
+    $artistId."&extended=1&v=5.95"
+);
+//tmpl-kate-common-end
+```

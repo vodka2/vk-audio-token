@@ -1,0 +1,35 @@
+---
+name: audio.getPlaylistById
+menu: "API Methods"
+route: method/audio_getPlaylistById
+---
+
+# audio.getPlaylistById
+
+Get information about playlist by id.
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|owner_id|Id of the owner of the playlist|
+|playlist_id|Playlist id|
+|access_key|May be needed, when owner_id starts with "-"|
+
+These fields are returned by audio.searchAlbums method and other methods that return playlists.
+
+Example (Kate):
+```php
+//tmpl-kate-common-start
+$ownerId = -1;
+$albumId = 2;
+$accessKey = "123";
+
+curl_setopt(
+    $ch,
+    CURLOPT_URL,
+    "https://api.vk.com/method/audio.getPlaylistById?access_token=".TOKEN.
+    "&owner_id=$ownerId&playlist_id=$albumId&access_key=$accessKey&count=1&v=5.95"
+);
+//tmpl-kate-common-end
+```

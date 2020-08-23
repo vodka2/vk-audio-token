@@ -16,6 +16,7 @@ Parameters:
 |album_id (optional)|Playlist id (for example, obtained by audio.getPlaylists)|
 |count (optional)|Maximum number of audios to return|
 |offset (optional)|Offset to skip that number of audios|
+|access_key|May be needed when owner_id starts with "-" (for example, when using audio.searchAlbums method)|
 
 If both `owner_id` and `album_id` are not specified, this method returns current user audios 
 (for which the token was obtained) 
@@ -54,7 +55,7 @@ $albumId = 1;
 curl_setopt(
     $ch,
     CURLOPT_URL,
-    "https://api.vk.com/method/audio.get?access_token=".TOKEN."&owner_id=$ownerId&albumId=$albumId&count=10&v=5.95"
+    "https://api.vk.com/method/audio.get?access_token=".TOKEN."&owner_id=$ownerId&album_id=$albumId&count=10&v=5.95"
 );
 //tmpl-kate-common-end
 ```
