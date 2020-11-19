@@ -1,0 +1,41 @@
+---
+name: audio.getCatalog
+menu: "New API Methods"
+route: newmethod/audio_getCatalog
+---
+
+# audio.getCatalog
+
+Get current user sections or search for artists.
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|artist_id (optional)|Artist id|
+|query (optional)|Audio name or performer to search for|
+|context (optional)|Id of the context|
+|count (optional)|Number of sections to return|
+|start_from (optional)|Id of the offset|
+
+Context ids are returned in the `context` field. 
+Offset is returned in the `next_from` field.
+
+If neither `artist_id` nor `query` are specified, sections for the current user are returned.
+
+Example — search for audios by an artist (VK Official):
+
+```php
+//tmpl-vkoff-common-start
+$query = "Justin Bieber - Baby";
+
+curl_setopt(
+    $ch, CURLOPT_URL, "https://api.vk.com/method/audio.getCatalog"
+);
+curl_setopt($ch,
+    CURLOPT_POSTFIELDS,
+    "v=5.116&https=1&lang=en&query=".urlencode($query)."&access_token=".TOKEN
+);
+//tmpl-vkoff-common-end
+```
+

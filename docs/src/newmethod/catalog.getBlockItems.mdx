@@ -1,0 +1,38 @@
+---
+name: catalog.getBlockItems
+menu: "New API Methods"
+route: newmethod/catalog_getBlockItems
+---
+
+# catalog.getBlockItems
+
+Get items in a block. A block is a part of the section.
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|block_id|Id of the section|
+|start_from (optional)|Id of the offset|
+
+Block ids are returned in `id` or `block_id` fields. 
+They are returned, for example, by catalog.getSection method. 
+
+Offset is returned in the `next_from` field and is needed, for example, for scrolling suggested artists right
+(getting more artist icons)
+
+Example (VK Official):
+
+```php
+//tmpl-vkoff-common-start
+$block_id = 'abc12345';
+
+curl_setopt($ch, CURLOPT_URL,
+    "https://api.vk.com/method/catalog.getBlockItems"
+);
+curl_setopt($ch, CURLOPT_POSTFIELDS,
+    "v=5.116&https=1&block_id=".urlencode($block_id)."&access_token=".TOKEN
+);
+//tmpl-vkoff-common-end
+```
+

@@ -1,0 +1,47 @@
+---
+name: execute.savePlaylist
+menu: "New API Methods"
+route: newmethod/execute_savePlaylist
+---
+
+# execute.savePlaylist
+
+Create or edit playlist
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|playlist_id|Id of the playlist. If 0 a new playlist is created|
+|owner_id|Id of the owner of the playlist|
+|title|Playlist title|
+|description|Playlist description|
+|audio_ids_to_add (optional)|Comma separated list of audio ids — owner_id, audio_id, access_key (optional), i.e. `-123_123_abc123`|
+|reorder_actions (optional)|JSON array, where each element is JSON array of owner_id, audio_id, new position in playlist|
+
+Access keys in `audio_ids_to_add` may be needed where audio owner id starts with "-".
+
+`reorder_actions` parameter is needed to replay reordering on the server. For example, `[[123,456,2],[678,901,0]]` 
+means "make 123_456 the third element, then make 678_901 the first element of the playlist".
+
+Example of creating a new playlist (VK Official):
+
+```php
+//tmpl-vkoff-common-start
+$title = 'Playlist title';
+$description = 'Playlist description';
+$owner_id = 12345;
+$playlist_id = 0;
+$audio_ids_to_add = '12345_1333_abc123,56789_2444_def567';
+
+curl_setopt(
+    $ch, CURLOPT_URL, "https://api.vk.com/method/execute.savePlaylist"
+);
+curl_setopt($ch, CURLOPT_POSTFIELDS,
+    "v=5.116&https=1&title=".urlencode($title)."&description=".urlencode($description).
+    "&audio_ids_to_add=".urlencode($audio_ids_to_add)."&playlist_id=${playlist_id}&owner_id=${owner_id}".
+    "&lang=en&access_token=".TOKEN
+);
+//tmpl-vkoff-common-end
+```
+

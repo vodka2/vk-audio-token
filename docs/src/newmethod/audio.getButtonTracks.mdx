@@ -1,0 +1,36 @@
+---
+name: audio.getButtonTracks
+menu: "New API Methods"
+route: newmethod/audio_getButtonTracks
+---
+
+# audio.getButtonTracks
+
+Get audios that are shown after pressing a button in application. 
+For example, current user audios in random order.
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|id|Id of the block with audios|
+|count|Maximum number of audios to return|
+|shuffle_seed (optional)|Seed for the random generator. If not specified, it also will be random|
+
+To get next audios, pass id from `next_from` as the `id` parameter.
+
+Example (VK Official):
+
+```php
+//tmpl-vkoff-common-start
+$id = 'abcde12345';
+
+curl_setopt(
+    $ch, CURLOPT_URL, "https://api.vk.com/method/audio.getButtonTracks"
+);
+curl_setopt($ch, CURLOPT_POSTFIELDS,
+    "v=5.116&https=1&id=".urlencode($id)."&seed=9&lang=en&access_token=".TOKEN
+);
+//tmpl-vkoff-common-end
+```
+

@@ -1,0 +1,38 @@
+---
+name: execute.addAudioToPlaylist
+menu: "New API Methods"
+route: newmethod/execute_addAudioToPlaylist
+---
+
+# execute.addAudioToPlaylist
+
+Add audios to playlist
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|playlist_id|Id of the playlist|
+|owner_id|Id of the owner of the playlist|
+|audio_ids (optional)|Comma separated list of audio ids — owner_id, audio_id, access_key (optional), i.e. `-123_123_abc123`|
+
+Access keys in `audio_ids` may be needed where audio owner id starts with "-".
+
+Example (VK Official):
+
+```php
+//tmpl-vkoff-common-start
+$owner_id = 12345;
+$playlist_id = 7;
+$audio_ids = '12345_1333_abc123,56789_2444_def567';
+
+curl_setopt(
+    $ch, CURLOPT_URL, "https://api.vk.com/method/execute.addAudioToPlaylist"
+);
+curl_setopt($ch, CURLOPT_POSTFIELDS,
+    "v=5.116&https=1&owner_id=${owner_id}&playlist_id=${playlist_id}&audio_ids=".urlencode($audio_ids).
+    "&lang=en&access_token=".TOKEN
+);
+//tmpl-vkoff-common-end
+```
+

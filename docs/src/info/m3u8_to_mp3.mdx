@@ -1,0 +1,23 @@
+---
+name: .m3u8 to .mp3
+menu: "General info"
+route: info/m3u8_to_mp3
+---
+
+# .m3u8 to .mp3
+
+Use this function:
+
+```php
+function getMp3FromM3u8($url) {
+    // Not a m3u8 url
+    if (!strpos($url, "index.m3u8?")) {
+        return $url;
+    }
+    if (strpos($url, "/audios/")) {
+        return preg_replace('~^(.+?)/[^/]+?/audios/([^/]+)/.+$~', '\\1/audios/\\2.mp3', $url);
+    } else {
+        return preg_replace('~^(.+?)/(p[0-9]+)/[^/]+?/([^/]+)/.+$~', '\\1/\\2/\\3.mp3', $url);
+    }
+}
+```

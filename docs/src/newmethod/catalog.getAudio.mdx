@@ -1,0 +1,30 @@
+---
+name: catalog.getAudio
+menu: "New API Methods"
+route: newmethod/catalog_getAudio
+---
+
+# catalog.getAudio
+
+Get audios and sections for a specified user or community
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|owner_id (optional)|User or community id. If not specified, current user audios will be returned|
+|need_blocks (optional)|0 — return only section names and ids, 1 — also return profile info, audios and blocks|
+
+Example (VK Official):
+
+```php
+//tmpl-vkoff-common-start
+curl_setopt(
+    $ch, CURLOPT_URL, "https://api.vk.com/method/catalog.getAudio"
+);
+curl_setopt($ch, CURLOPT_POSTFIELDS,
+    "v=5.116&https=1&need_blocks=0&lang=en&access_token=".TOKEN
+);
+//tmpl-vkoff-common-end
+```
+

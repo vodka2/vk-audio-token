@@ -1,0 +1,34 @@
+---
+name: catalog.getAudioSearch
+menu: "New API Methods"
+route: newmethod/catalog_getAudioSearch
+---
+
+# catalog.getAudioSearch
+
+Search for audios
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|need_blocks (optional)|0 — return only section names and ids, 1 — also return blocks|
+|query (optional)|Audio name or performer to search for. If empty only suggestions are returned|
+|context (optional)|Id of the context|
+
+Context ids are returned in the `context` field when searching. 
+For example, they are needed to search for the specific artist.   
+
+Example (VK Official):
+
+```php
+//tmpl-vkoff-common-start
+curl_setopt(
+    $ch, CURLOPT_URL, "https://api.vk.com/method/catalog.getAudioSearch"
+);
+curl_setopt($ch, CURLOPT_POSTFIELDS,
+    "v=5.116&https=1&need_blocks=0&lang=en&access_token=".TOKEN
+);
+//tmpl-vkoff-common-end
+```
+

@@ -1,0 +1,42 @@
+---
+name: execute.getPlaylist
+menu: "New API Methods"
+route: newmethod/execute_getPlaylist
+---
+
+# execute.getPlaylist
+
+Get playlist audios
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|id|Id of the playlist|
+|owner_id|Id of the owner of the playlist|
+|access_key|May be needed when owner id starts with "-"|
+|audio_offset (optional)|Offset to skip that number of audios|
+|audio_count (optional)|Maximum number of audios to return|
+|need_playlist (optional)|1 - return information about the playlist: title, followers, plays..., 0 - don't return it (default)|
+|need_owner (optional)|1 - return information about the owner: photo, type, name..., 0 - don't return it (default)|
+
+Access key must match access key of the playlist, for example, returned by catalog.getAudioArtist method 
+
+Example (VK Official):
+
+```php
+//tmpl-vkoff-common-start
+$id = 12345;
+$owner_id = -67890;
+$access_key = '1234abc567';
+
+curl_setopt(
+    $ch, CURLOPT_URL, "https://api.vk.com/method/execute.getPlaylist"
+);
+curl_setopt($ch, CURLOPT_POSTFIELDS,
+    "v=5.116&https=1&id=$id&owner_id=${owner_id}&access_key=${access_key}".
+    "&need_playlist=1&need_owner=0&lang=en&access_token=".TOKEN
+);
+//tmpl-vkoff-common-end
+```
+

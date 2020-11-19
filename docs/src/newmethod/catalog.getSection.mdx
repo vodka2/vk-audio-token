@@ -1,0 +1,39 @@
+---
+name: catalog.getSection
+menu: "New API Methods"
+route: newmethod/catalog_getSection
+---
+
+# catalog.getSection
+
+Get section by id. Sections are divided into blocks. 
+Use catalog.getBlockItems to get items from block.
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|section_id|Id of the section|
+|start_from (optional)|Id of the offset|
+
+Section ids are returned in the `id` or `section_id` fields. 
+For example, they are returned by catalog.getAudio method.
+
+Offset is returned in the `next_from` field and is needed, for example, for scrolling tracks by an artist down
+(getting more tracks) 
+
+Example (VK Official):
+
+```php
+//tmpl-vkoff-common-start
+$section_id = 'abc12345';
+
+curl_setopt(
+    $ch, CURLOPT_URL, "https://api.vk.com/method/catalog.getSection"
+);
+curl_setopt($ch, CURLOPT_POSTFIELDS,
+    "v=5.116&https=1&section_id=".urlencode($section_id)."&access_token=".TOKEN
+);
+//tmpl-vkoff-common-end
+```
+

@@ -1,0 +1,38 @@
+---
+name: catalog.getAudioArtist
+menu: "New API Methods"
+route: newmethod/catalog_getAudioArtist
+---
+
+# catalog.getAudioArtist
+
+Get artist page
+
+Parameters:
+
+|Name|Value|
+|---|---|
+|artist_id|Artist id|
+|need_blocks (optional)|0 — return only section names and ids, 1 — return blocks|
+
+Artist ids can be either numbers or strings. 
+Numeric ids are returned in the `id` field, 
+for example, by catalog.getAudioSearch method in the `main_artists` field. 
+String id is the last part of an url similar to `https://vk.com/artist/whitetown`, 
+id is "whitetown" in this example. 
+
+Example (VK Official):
+
+```php
+//tmpl-vkoff-common-start
+$artist_id = 'whitetown';
+
+curl_setopt(
+    $ch, CURLOPT_URL, "https://api.vk.com/method/catalog.getAudioArtist"
+);
+curl_setopt($ch, CURLOPT_POSTFIELDS,
+    "v=5.116&https=1&need_blocks=1&artist_id=".urlencode($artist_id)."&lang=en&access_token=".TOKEN
+);
+//tmpl-vkoff-common-end
+```
+
