@@ -1,0 +1,46 @@
+---
+name: audio.edit
+menu: "API Methods"
+route: method/audio_edit
+---
+
+# audio.edit
+
+Edits an audio file on a user or community page
+
+Parameters:
+
+|Name|Value|
+|----|-----|
+|owner_id (integer)|ID of the user or community that owns the audio file|
+|audio_id (positive number)|Audio file ID|
+|artist (string, optional)|Name of the artist|
+|title (string, optional)|Title of the audio file|
+|text (string, optional)|Text of the lyrics of the audio file|
+|genre_id (positive number, optional)|Genre of the audio file. See the list of [audio genres](/info/audio_genres/)|
+|no_search (flag, either 1 or 0)|1 — audio file will not be available for search. 0 — audio file will be available for search (default)|
+
+This method is only available for audio files uploaded by users
+
+Example (Kate):
+
+```php
+//tmpl-kate-common-start
+$ownerId = 371745461;
+$audioId = 456289486;
+$artist = "New artist";
+$title = "New title";
+
+curl_setopt(
+    $ch,
+    CURLOPT_URL,
+    "https://api.vk.com/method/audio.edit?access_token=".TOKEN.
+    "&owner_id=$ownerId".
+    "&audio_id=$audioId".
+    "&artist=".urlencode($artist).
+    "&title=".urlencode($title).
+    "&v=5.95"
+);
+//tmpl-kate-common-end
+```
+
